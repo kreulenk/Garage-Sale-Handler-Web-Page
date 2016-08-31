@@ -1,0 +1,26 @@
+@(username: String, saleName: String, items: List[Item], message: String)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add items to cart</title><link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        <p>Click on an item that you would like to add to your cart</p>
+    @if(items != null) {
+        @for(item <- items) {
+            <a href="@routes.CartController.addToCart(username + "," + item.id + "," + saleName)" method="get">Item: @item.itemName Price: @item.price</a><br>
+        }
+    }
+
+        <p> If you would like to add multiple items to your cart at once, enter their stock numbers separated by spaces below. </p>
+        <form action="@routes.CartController.addToCartMultiple(username)" method="post">
+            <input type="type" name="items">
+        </form>
+    <p>@message</p>
+        <form action="@routes.HomeController.index(username)" method="post">
+            <button>Back to Homepage</button>
+        </form>
+    </body>
+</html>

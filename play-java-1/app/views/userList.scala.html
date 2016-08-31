@@ -1,0 +1,46 @@
+@(username: String, users: List[User], sales: List[Sale])
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Close Sale</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        <p>Here is a list of all of the Users and their statuses</p>
+        @for(user <- users){
+            @user.username
+            <br>
+                Administrator in: @for(sale <- sales) {
+                    @if(sale.admin.equals(user.username)) {
+                        @sale.name
+                    }
+                }
+
+            <br>
+            BookKeeper in: @for(sale <- sales){
+                @if(sale.bookkeeper.equals(user.username)){
+                    @sale.name
+                }
+            }
+            <br>
+            Seller in: @for(sale <- sales){
+                @if(!sale.admin.equals(user.username) && !sale.bookkeeper.equals(user.username)){
+                    @sale.name
+                }
+            }
+            <br>
+            Account Status:
+            @if(user.attempts < 5){
+                Unlocked
+            }@if(user.attempts >= 5){
+                Locked with @user.attempts bad login attempts<br>
+                <a href="@routes.UserController.unlockUser(username + "," + user.username)">Click to unlock account</a>
+            }
+            <br><br>
+        }
+        <form action="@routes.HomeController.index(username)" method="post">
+            <button>Back</button>
+        </form>
+    </body>
+</html>

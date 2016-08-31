@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Page</title>
+  <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+</head>
+<body>
+<p>Welcome to the Ultimate Yard-Sale Helper!</p>
+  <form action="@routes.HomeController.login()" method="get">
+     <button>To Login Page</button>
+  </form>
+  <form action="@routes.HomeController.register()" method="get">
+    <button>Register</button>
+    </form>
+</body>
+</html>

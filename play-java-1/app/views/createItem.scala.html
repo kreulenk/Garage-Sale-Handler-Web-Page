@@ -1,0 +1,45 @@
+@(username: String, ofSale: String)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Create Item</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")" type="text/javascript"></script><style type="text/css">
+    </style>
+    </head>
+    <body>
+        <p>This is where you can create an item and have a sale that you associate with it.</p>
+        <p>The item you're creating is part of the sale @ofSale</p>
+        <form action="@routes.ItemController.registerItem(username)" method="post">
+            <p>Item Name</p>
+            <input type="text" name ="itemName">
+            <p>Price of item</p>
+            <span>$</span><input type="number" name="price" step = 0.01 value = 0.00>
+            <br><br>
+            <p>Description of item</p>
+            <input type="text" name="description">
+            <p>Select which sale you would like this item to be a part of.</p>
+            <script src="@routes.Assets.versioned("js/createItem.js")" type="text/javascript"></script>
+            <select id="sale" name="sale">
+                <option></option>
+            </select>
+            <br><br>
+            <iframe src="http://localhost:9000/img" id = "ifr">
+            </iframe>
+            <script>
+                function change() {
+                    document.getElementById("pat").value =
+                            document.getElementById("ifr").contentWindow.document.getElementById("path").value;
+                }
+            </script>
+            <input type ="hidden" id = "pat" name="imgPath" value = "No Image!" >
+            <br><br>
+            <input type="button" value="Use Image!" onClick="change()" />
+            <br><br>
+            <button>Create item</button>
+        </form>
+        <form action = "@routes.HomeController.index(username)" method = "post">
+            <button>Cancel</button>
+        </form>
+    </body>
+</html>

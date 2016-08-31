@@ -1,0 +1,12 @@
+@(username: String)
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Your Cart is Empty</title><link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <form action="@routes.HomeController.index(username)" method="POST">
+        <button>Return to Homepage</button>
+    </form>
+</html>

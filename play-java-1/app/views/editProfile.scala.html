@@ -1,0 +1,39 @@
+@(user: User)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Edit Profile</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        <div>
+            <p>This is where you can edit the profile of @user.username. </p>
+        </div>
+        <div>
+        <form action="@routes.UserController.updateProfile(user.username)" method="POST">
+            <input type="hidden" name="username" value=@user.username>
+            <input type="hidden" name="badLoginAttempts" value=@user.attempts>
+            <p>Change password</p>
+            <input type="text" name="password" value=@user.password>
+            <p>Change email</p>
+            <input type="text" name="email" value=@user.email>
+            <p>Change description</p>
+            <input type="text" name="description" value=@user.description>
+            <br>
+            <p>Is this user a guest?</p>
+            <input type="checkbox" name="guest" value=1> Yes
+
+            <button>Make Changes</button>
+        </form>
+    </div>
+        <div>
+            <form action="@routes.HomeController.welcome()" method="get">
+                <button>Logout</button>
+            </form>
+            <form action="@routes.HomeController.index(user.username)" method="post">
+                <button>Cancel</button>
+            </form>
+        </div>
+    </body>
+</html>

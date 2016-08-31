@@ -1,0 +1,22 @@
+@(username: String, itemsInCart:  List[Item])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>View Items In Cart</title><link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        @if(itemsInCart != null) {
+            @for(item <- itemsInCart) {
+                <p>@item.itemName</p><br>
+            }
+        }
+    <form action= "@routes.CartController.checkedOut("kevin")" method="POST">
+        <input type="submit" value="Checkout">
+    </form>
+        <form action="@routes.HomeController.index(username)" method="post">
+            <button>Back to Homepage</button>
+        </form>
+    </body>
+</html>

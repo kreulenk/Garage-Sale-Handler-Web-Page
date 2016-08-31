@@ -1,0 +1,25 @@
+@(username: String, message: String, users: List[User], sales: List[Sale])
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Close Sale</title>
+  <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+</head>
+<body>
+<p>The sales that you are an administrator of are listed below. Click on them to close them</p>
+    @for(sale <- sales) {
+        @for(user <- users) {
+            <form method="POST">
+            @if(sale.admin.equals(user.username)) {
+                <a href="@routes.SaleController.deleteSale(username + "," + sale.name)">@sale.name</a>
+            }
+            </form>
+        }
+    }
+    <p>@message</p>
+    <form action="@routes.HomeController.index(username)" method="post">
+        <button>Back to Homepage</button>
+    </form>
+</body>
+</html>

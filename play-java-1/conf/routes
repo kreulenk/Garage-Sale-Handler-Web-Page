@@ -1,0 +1,50 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.main
+GET     /welcome                    controllers.HomeController.welcome
+GET     /img                        controllers.ItemController.img
+POST    /up                         controllers.ItemController.upload
+GET     /getPath                    controllers.ItemController.upload
+GET     /musicPlayer                controllers.HomeController.musicPlayer
+GET     /login                      controllers.HomeController.login
+GET     /register                   controllers.HomeController.register
+GET     /sale                       controllers.SaleController.getSales
+GET     /item                       controllers.ItemController.getItems
+GET     /index                      controllers.HomeController.index(String)
+GET     /editItem                   controllers.ItemController.editItem(String)
+POST    /updateItem                 controllers.ItemController.updateItem(String)
+POST    /itemSearch                 controllers.ItemController.itemSearch(String)
+POST    /registerItem               controllers.ItemController.registerItem(String)
+POST    /createItem                 controllers.ItemController.createItem(String)
+GET     /salesMainPage              controllers.SaleController.saleMainPage(String)
+POST    /createSale                 controllers.SaleController.createSale(String)
+POST    /index                      controllers.HomeController.index(String)
+POST    /editProfile                controllers.UserController.editProfile(String)
+POST    /login                      controllers.UserController.verifyUser
+POST    /sale                       controllers.SaleController.registerSale(String)
+POST    /register                   controllers.UserController.registerUser
+POST    /updateProfile              controllers.UserController.updateProfile(String)
+POST    /viewSales                  controllers.SaleController.viewSales(String)
+POST    /viewCart                   controllers.CartController.viewCart(String)
+POST    /transaction                controllers.SaleController.transaction(String)
+GET     /transactionItemPage        controllers.ItemController.transactionItemPage(String)
+GET     /addToCart                  controllers.CartController.addToCart(String)
+POST    /addToCartMultiple          controllers.CartController.addToCartMultiple(String)
+POST    /checkedOut                 controllers.CartController.checkedOut(String)
+POST    /viewTag                    controllers.ItemController.viewItems(String)
+POST    /closeSale                  controllers.SaleController.closeSale(String)
+POST    /userList                   controllers.UserController.userList(String)
+GET     /emptyCart                  controllers.CartController.emptyCart(String)
+GET     /deleteSale                 controllers.SaleController.deleteSale(String)
+POST    /showFinancialReport        controllers.UserController.showFinancialReport(String)
+GET     /unlockUser                 controllers.UserController.unlockUser(String)
+# An example controller showing how to use dependeny injcection
+GET     /count                      controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET     /message                    controllers.AsyncController.message
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

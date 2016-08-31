@@ -1,0 +1,197 @@
+@(username: String, items: List[Item])
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>View All Sales</title><link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")" type="text/javascript"></script>
+  </head>
+  <body>
+    <script src="@routes.Assets.versioned("js/showItems.js")" type="text/javascript"></script>
+    <ul>
+    @if(items != null) {
+      @for(item <- items) {
+          @item.itemName
+          <style>
+          br {
+              line-height: 40%;
+          }
+          </style>
+          <br>
+          <br>
+
+          <div class="box">
+              <a class="button" href=#@item.itemName>Generate Tag</a>
+          </div>
+          <div id=@item.itemName class="overlay">
+              <div class="popup">
+                  <h2>Tag</h2>
+                  <a class="close" href="#">&times;</a>
+                  <div class="content">
+                      @item.toString
+                  </div>
+              </div>
+          </div>
+          <Style>
+              .button {
+                  font-size: 1em;
+                  padding: 8px;
+                  color: #fff;
+                  border: 2px solid #d8b504;
+                  border-radius: 20px/50px;
+                  text-decoration: none;
+                  cursor: pointer;
+                  transition: all 0.3s ease-out;
+              }
+              .button:hover {
+                  background: #d8bc28;
+              }
+              .overlay {
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                  background: rgba(0, 0, 0, 0.7);
+                  transition: opacity 500ms;
+                  visibility: hidden;
+                  opacity: 0;
+              }
+              .overlay:target {
+                  visibility: visible;
+                  opacity: 1;
+              }
+
+              .popup {
+                  margin: 70px auto;
+                  padding: 20px;
+                  background: #fff;
+                  border-radius: 5px;
+                  width: 30%;
+                  position: relative;
+                  transition: all 5s ease-in-out;
+              }
+
+              .popup h2 {
+                  margin-top: 0;
+                  color: #333;
+                  font-family: Tahoma, Arial, sans-serif;
+              }
+              .popup .close {
+                  position: absolute;
+                  top: 20px;
+                  right: 30px;
+                  transition: all 200ms;
+                  font-size: 35px;
+                  font-weight: bold;
+                  text-decoration: none;
+                  color: #333;
+              }
+            .popup .close:hover {
+                color: #d8bc28;
+            }
+            .popup .content {
+                max-height: 30%;
+                overflow: auto;
+            }
+
+          </Style>
+          <br>
+        }
+    }
+    </ul>
+      <ul>
+          <style>
+          br {
+              line-height: 40%;
+          }
+          </style>
+          <br>
+          <br>
+          <div class="box">
+              <a class="button" href=#allTags>Generate Tags for all Items</a>
+          </div>
+          <div id=allTags class="overlay">
+              <div class="popup">
+                  <h2>Tag</h2>
+                  <a class="close" href="#">&times;</a>
+                  <div class="content">
+                  @if(items != null) {
+                      @for(item <- items) {
+                          @item.toString
+                          <br>
+                          }
+                  }
+                  </div>
+              </div>
+              <Style>
+              .button {
+                  font-size: 1em;
+                  padding: 8px;
+                  color: #fff;
+                  border: 2px solid #d8b504;
+                  border-radius: 20px/50px;
+                  text-decoration: none;
+                  cursor: pointer;
+                  transition: all 0.3s ease-out;
+              }
+              .button:hover {
+                  background: #d8bc28;
+              }
+              .overlay {
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                  background: rgba(0, 0, 0, 0.7);
+                  transition: opacity 500ms;
+                  visibility: hidden;
+                  opacity: 0;
+              }
+              .overlay:target {
+                  visibility: visible;
+                  opacity: 1;
+              }
+              .popup {
+                  margin: 80px auto;
+                  padding: 20px;
+                  background: #fff;
+                  border-radius: 5px;
+                  width: 30%;
+                  position: relative;
+                  transition: all 5s ease-in-out;
+              }
+              .popup h2 {
+                  margin-top: 0;
+                  color: #333;
+                  font-family: Tahoma, Arial, sans-serif;
+              }
+              .popup .close {
+                  position: absolute;
+                  top: 10px;
+                  right: 10px;
+                  transition: all 200ms;
+                  font-size: 35px;
+                  font-weight: bold;
+                  text-decoration: none;
+                  color: #333;
+              }
+
+              .popup .close:hover {
+                  color: #d8b72d;
+              }
+              .popup .content {
+                  max-height: 30%;
+                  overflow: auto;
+              }
+              </Style>
+              <br>
+          </div>
+      </ul>
+      <form action="@routes.HomeController.index(username)" method="post">
+          <button>Cancel</button>
+      </form>
+  </body>
+</html>

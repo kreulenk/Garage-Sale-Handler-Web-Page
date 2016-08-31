@@ -1,0 +1,26 @@
+body {
+    background: #d1d1e0;
+    font-size: 150%;
+    font-family: "Arial", Helvetica, sans-serif;
+}
+h2 {
+    font-size: 75%;
+}
+br {
+    font-size: 150%;
+}
+input{
+    background-color: #E9E9E9;
+    color: #000000;
+    padding: 10px;
+    font-size: 50%;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+.right{
+    top: 55px;
+}
+.left{
+    top: 20px;
+}

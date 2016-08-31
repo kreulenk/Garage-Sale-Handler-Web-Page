@@ -1,0 +1,32 @@
+@(username: String, messages: String, userList: List[User])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create Sale</title><link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        <p>This is where you can create a sale.</p>
+        <form action="@routes.SaleController.registerSale(username)" method="post">
+            <p>Sale Name</p>
+            <input type="text" name ="name">
+            <p>Description</p>
+            <input type="text" name="description">
+            <input type="hidden" value=@username name="admin">
+            <input type="hidden" value=0 name="profit">
+            <br><br>
+
+            Bookkeeper for this project<br>
+            @for(user <- userList){
+                <input type="radio" name="bookkeeper" value=@user.username> @user.username <br>
+            }
+
+            <button>Register</button>
+        </form>
+        <form action = "@routes.HomeController.index(username)" method = "post">
+            <button>Back</button>
+        </form>
+        <div>@messages</div>
+    </body>
+</html>

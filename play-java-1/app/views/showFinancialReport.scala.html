@@ -1,0 +1,20 @@
+@(username: String, sales: List[Sale])
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Show Financial Report</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        <p>Here is a financial report for the sales that you are a book keeper of.</p>
+        @for(sale <- sales) {
+            @if(username.equals(sale.bookkeeper)) {
+                For the sale @sale.name there is currently a profit of @sale.profit. <br>
+            }
+        }
+        <form action = "@routes.HomeController.index(username)" method = "post">
+            <button>Back</button>
+        </form>
+    </body>
+</html>

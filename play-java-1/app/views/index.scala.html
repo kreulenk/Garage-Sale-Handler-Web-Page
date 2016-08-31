@@ -1,0 +1,117 @@
+@(username: String, items: List[Item], user: User)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Main page</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/index.css")">
+            <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")" type="text/javascript"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <h3>This is the main page of the application!</h3>
+        @if(user.guest==1){
+            <h2>This is a limited page because you are a guest user.</h2>
+        }
+        <div class="pull-right">
+            <form action="@routes.UserController.editProfile(username)" method="post">
+                <input type="submit" value="Edit Profile">
+            </form>
+            <form action="@routes.HomeController.welcome()" method="get">
+                <input type="submit" value="Logout">
+            </form>
+        </div>
+        <div class="container">
+            <div class="dropdown" style="float:left;">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sale
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    @if(user.guest == 0){
+                        <li>
+                            <form action="@routes.SaleController.createSale(username)" method="post">
+                                <input type="submit" value="Create Sale">
+                            </form>
+                        </li>
+                    }
+                    <li>
+                        <form action="@routes.SaleController.viewSales(username)" method="post">
+                            <input type="submit" value="View Sales">
+                        </form>
+                    </li>
+                    @if(user.guest ==0){
+                        <li>
+                            <form action="@routes.SaleController.closeSale(username)" method="post">
+                                <input type="submit" value="Close Sale">
+                            </form>
+                        </li>
+                    }
+                </ul>
+            </div>
+            @if(user.guest==0){
+                <div class="dropdown" style="float:left;">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Cart
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form action="@routes.SaleController.transaction(username)" method="post">
+                                <input type="submit" value="Add items to cart">
+                            </form>
+                        </li>
+                        <li>
+                            <form action="@routes.CartController.viewCart(username)" method="post">
+                                <input type="submit" value="View Cart/Checkout">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            }
+            <div class="dropdown" style="float:left;">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Item
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    @if(user.guest==0){
+                        <li>
+                            <form action="@routes.ItemController.createItem(username)" method="post">
+                                <input type="submit" value="Create Item">
+                            </form>
+                        </li>
+                    }
+                    <li>
+                        <form action="@routes.ItemController.viewItems(username)" method="post">
+                            <input type="submit" value="View Tag">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="dropdown" style="float:left;">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Other Functions
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <form action="@routes.UserController.userList(username)" method="post">
+                            <input type="submit" value="User List">
+                        </form>
+                    </li>
+                    @if(user.guest==1){
+                        <li>
+                            <form action="@routes.UserController.showFinancialReport(username)" method="post">
+                                <input type="submit" value="Show Financial Report">
+                            </form>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <br>
+            <p>Search for a catalog item. Once you have found one you may click on it to edit the items attributes.</p>
+            <form action="@routes.ItemController.itemSearch(username)" method="post">
+                <input type="text" name="itemName">
+            </form>
+            @if(items != null) {
+                @for(item <- items){
+                    <a href="@routes.ItemController.editItem(username + "," + item.id)" method="get">Item: @item.itemName Price: @item.price Belongs to sale: @item.sale</a><br>
+                    }
+            }
+        </div>
+    </body>
+</html>

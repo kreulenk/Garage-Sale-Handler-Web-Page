@@ -1,0 +1,46 @@
+@(username: String, item: Item)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Edit Item</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <script src="@routes.Assets.versioned("javascripts/jquery-2.2.4.min.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        <p>Here you can edit the attributes of <b>@item.itemName</b> in the sale <b>@item.sale</b>.</p>
+        <div>
+            <form action="@routes.ItemController.updateItem(username)" method="POST">
+                <input type="hidden" name="itemName" value=@item.itemName>
+                <input type="hidden" name="id" value="@item.id">
+                <p>Change price:</p>
+                <span>$</span><input type="number" name="price" step = 0.01 value=@item.price>
+                <p>Change item description</p>
+                <input type="text" name="description" value=@item.description>
+                <p>Change Sale: <br>(If you wish to make the sale the same simply put the sale that the item was already part of).</p>
+                <script src="@routes.Assets.versioned("js/createItem.js")" type="text/javascript"></script>
+                <select id="sale" name="sale">
+                    <option value=@item.sale></option>
+                </select>
+                <br><br>
+                <img src="/assets/images/@item.imgPath" height="200" width="200"/>
+                <br><br>
+                <p>Change image</p>
+                <iframe src="http://localhost:9000/img" id = "ifr">
+            </iframe>
+                <script>
+                function change() {
+                    document.getElementById("pat").value =
+                            document.getElementById("ifr").contentWindow.document.getElementById("path").value;
+                }
+            </script>
+                <input type ="hidden" id = "pat" name="imgPath">
+                <br><br>
+                <input type="button" value="Use Image!" onClick="change()" />
+                <br><br>
+                <button>Make Changes</button>
+            </form>
+        </div>
+
+    </body>
+</html>

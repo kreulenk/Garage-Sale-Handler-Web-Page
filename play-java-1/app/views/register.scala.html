@@ -1,0 +1,30 @@
+@(message: String)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration Page</title><link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        <form action="@routes.UserController.registerUser()" method="post">
+            <p>Username</p>
+            <input type="text" name ="username">
+            <p>Password</p>
+            <input type="text" name="password">
+            <p>Email</p>
+            <input type="text" name="email">
+            <p>Description</p>
+            <input type="text" name="description">
+            <br>
+            <p>Is this user a guest?</p>
+            <input type="checkbox" name="guest" value=1> Yes
+            <br>
+            <input type="hidden" name="attempts" value=0>
+            <button>Register</button>
+        </form>
+        <form action="@routes.HomeController.welcome()" method="get">
+            <button>Cancel</button>
+        </form>
+        <div>@message</div>
+    </body>
+</html>

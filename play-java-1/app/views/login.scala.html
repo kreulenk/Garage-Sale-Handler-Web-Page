@@ -1,0 +1,23 @@
+@(message: String)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title><link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+</head>
+<body>
+    <div>
+  <form action="@routes.UserController.verifyUser()" method="POST">
+      <body>Username</body>
+    <input type="text" name ="username">
+      <body>Password</body>
+    <input type="text" name="password">
+    <button>Login</button>
+  </form>
+    <form action="@routes.HomeController.welcome()" method="get">
+        <button>Cancel</button>
+    </form>
+    </div>
+    <div><h2>@message</h2></div>
+</body>
+</html>
